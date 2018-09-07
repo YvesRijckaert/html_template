@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Yves Rijckaert">
+  <meta name="description" content="HTML template">
+  <title>Template site</title>
+</head>
+
+<body>
+  <header>
+    <h1>HTML template site</h1>
+  </header>
+  <nav>
+    <ul>
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    <!-- image for when the art direction doesn't change-->
+    <img class="banner-image" height="673" width="527" src="assets/img/brik_527.png"
+        srcset="assets/img/brik_527.png 527w,
+          assets/img/brik_440.png 440w,
+          assets/img/brik_350.png 350w,
+          assets/img/brik_210.png 210w,
+          assets/img/default.gif 1w"
+        sizes="(min-width: 450px) 30vw,
+          (min-width: 700px) 44vw,
+          1px"
+        alt="brik met smoothie - bestel nu" /> <!--sizes = if img doesnt have the same width as the viewport: img width / viewport width * 100.
+          1px: no image: default gif image -->
+
+    <!-- image for when the art direction changes-->
+    <picture>
+      <source media="(max-width: 449px)" srcset="assets/img/default.gif" />
+      <source media="(min-width: 980px)" srcset="assets/img/brik_527.webp" type="image/webp"/>
+      <source media="(min-width: 980px)" srcset="assets/img/brik_527.png" />
+      <source media="(min-width: 700px)" srcset="assets/img/brik_350.webp"  type="image/webp" />
+      <source media="(min-width: 700px)" srcset="assets/img/brik_350.png" />
+      <source media="(min-width: 450px)" srcset="assets/img/brik_210.webp" type="image/webp" />
+      <source media="(min-width: 450px)" srcset="assets/img/brik_210.png" />
+
+      <!--fallback-->
+      <img class="banner-image-2"
+          height="673" width="527"
+          srcset="assets/img/default.gif 1w,
+            assets/img/brik_210.png 210w,
+            assets/img/brik_350.png 350w,
+            assets/img/brik_440.png 440w,
+            assets/img/brik_527.png 527w"
+
+          sizes="(min-width: 450px) 30vw,
+            (min-width: 700px) 44vw,
+            1vw"
+          alt="brik met smoothie - bestel nu" />
+    </picture>
+
+    <svg width="140" height="170" viewbox="0 0 1000 400">
+      <!--Title and description-->
+      <title>House</title>
+      <desc>Stick Figure of a House</desc>
+
+      <!--Basic shapes-->
+      <rect x="0" y="0" width="50" height="50" /> <!--Rectangle-->
+      <circle cx="25" cy="25" r="25" /> <!--Cirlce (x, y, radius)-->
+      <ellipse cx="25" cy="25" rx="15" ry="10" /> <!--Ellipse (x, y, radiusX, radiusY)-->
+      <line x1="5" y1="5" x2="40" y2="40" /> <!--Straight line defined by points-->
+      <polyline points="05,30 15, 30" /> <!--Line consisting of multiple pieces -->
+      <polygon points="05,30 15, 30" /> <!--Filled in polygon shape-->
+      <text font-family="Vollkorn" font-size="55">Devine</text> <!--Text inside SVG with your own font-->
+
+      <!--Not so basic shapes-->
+      <path d="M 100 100 L 300 100 L 200 300 Z" />
+      <!--
+      M = moveto
+      L = lineto
+      H = horizontal lineto
+      V = vertical lineto
+      C = curveto
+      S = smooth curveto
+      Q = quadratic Bezier curve
+      T = smooth quadratic Bezier curveto
+      A = elliptical arc
+      Z = closepath
+      -->
+
+      <!--Grouping-->
+      <g id="house">
+        <title>House</title>
+        <desc>Stick Figure of a House</desc>
+      </g>
+
+      <!--Use: reusing elements, also from extern SVG files!-->
+      <use xlink:href="#house" x="70" y="100" />
+      <use xlink:href="houses.svg#chalet" x="70" y="100" />
+
+      <!--Defs: Best method for reusing. Define without drawing. Difference: g element gets drawn immediately.-->
+      <defs>
+        <g id="house2">
+          <title>House</title>
+          <desc>Stick Figure of a House</desc>
+        </g>
+      </defs>
+
+
+      <!--Symbol: grouping + dont draw + viewbox & aspectRatio.-->
+      <defs>
+        <symbol id="house3" preserveaspectratio="xMidYMid slice" viewbox="0 0 40 40">
+          <title>House</title>
+          <desc>Stick Figure of a House</desc>
+        </symbol>
+      </defs>
+
+      <!--Filters-->
+      <filter id="saturate" filterunits="objectBoundingBox">
+        <fecolormatrix type="saturate" result="satur" values="20"/>
+        <fecolormatrix type="hueRotate" in="satur" in2="SourceGraphic" values="291"/>
+      </filter>
+      <!--Call SVG filters via CSS
+        .saturate {
+          filter: url(#saturate)
+        }
+      -->
+    </svg>
+  </main>
+  <footer>
+  </footer>
+
+  <!-- Webfont loader (sometimes it's better to place this in the <head> tag -->
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>
+   WebFontConfig = {
+      google: {
+        families: ['Vollkorn: 400, 700', 'serif']
+      }
+   };
+
+   (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+      wf.async = true;
+      s.parentNode.insertBefore(wf, s);
+   })(document);
+</script>
+</body>
+
+</html>
