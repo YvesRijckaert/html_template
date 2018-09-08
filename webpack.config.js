@@ -86,6 +86,7 @@ const commonConfig = merge([
 const productionConfig = merge([
   parts.extractCSS(),
   {
+    mode: `production`,
     plugins: [
       new ImageminPlugin({
         test: /\.(jpe?g)$/i,
@@ -105,6 +106,7 @@ const productionConfig = merge([
 
 const developmentConfig = merge([
   {
+    mode: `development`,
     devServer: {
       overlay: true,
       contentBase: PATHS.src,
